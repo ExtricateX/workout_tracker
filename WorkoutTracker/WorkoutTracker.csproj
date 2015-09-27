@@ -16,7 +16,7 @@
     <RootNamespace>WorkoutTracker</RootNamespace>
     <AssemblyName>WorkoutTracker</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <MvcBuildViews>true</MvcBuildViews>
+    <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -311,7 +311,8 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
-  <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
-</Target>
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler Condition="'$(IsDesktopBuild)' != 'false'" VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+    <AspNetCompiler Condition="'$(IsDesktopBuild)' == 'false'" VirtualPath="temp" PhysicalPath="$(PublishDir)\_PublishedWebsites\$(ProjectName)" />
+  </Target>
 </Project>
