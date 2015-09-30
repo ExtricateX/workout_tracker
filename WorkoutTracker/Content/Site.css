@@ -22,3 +22,45 @@ select,
 textarea {
     max-width: 280px;
 }
+
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+
+body {
+    background: url(bg.jpg) no-repeat center 50px fixed;
+    background-size: cover;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    overflow:hidden;
+    text-align: center;
+    line-height: 50px;
+    color: #ccc;
+}
+
+.form-control {
+    background: #eeeedd !important;
+    padding-left: 5px !important;
+}
+
+.text-danger {
+    color: #980D03 !important
+}
+
+.btn-default {
+    border: 1px solid #333 !important;
+}
+
+.navbar {
+    background: #444433 !important;
+}
