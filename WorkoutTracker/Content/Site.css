@@ -1,6 +1,6 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 35px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -40,17 +40,21 @@ footer {
     position: absolute;
     left: 0;
     bottom: 0;
-    height: 50px;
+    height: 35px;
     width: 100%;
     overflow:hidden;
     text-align: center;
-    line-height: 50px;
+    line-height: 35px;
     color: #ccc;
 }
 
 .form-control {
     background: #eeeedd !important;
     padding-left: 5px !important;
+}
+
+.validation-summary-errors li {
+    list-style-type: none;
 }
 
 .text-danger {
@@ -63,4 +67,14 @@ footer {
 
 .navbar {
     background: #444433 !important;
+}
+
+@media (min-width: 768px) {
+    .form-horizontal .control-label {
+        text-align: left;
+    }
+}
+
+.login_checkbox {
+    padding-left: 0 !important;
 }

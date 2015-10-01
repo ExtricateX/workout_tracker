@@ -4,10 +4,14 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title</h2>
-<h4>Lets get going.</h4>
+<br />
+<br />
+<br />
+<br />
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-lg-5 col-md-5 col-md-push-2 col-sm-6 col-xs-9">
+        <h2>@ViewBag.Title</h2>
+        <h4>Lets get going.</h4>
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -32,7 +36,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
 
-                        <div class="checkbox">
+                        <div class="checkbox login_checkbox">
                             <label for="RememberMe">
                                 <input data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true">
                                 <input name="RememberMe" type="hidden" value="false">
@@ -55,7 +59,7 @@
             }
         </section>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-7 col-md-7 col-sm-6 col-xs-3">
         <section id="socialLoginForm">
            <!-- @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })-->
         </section>
