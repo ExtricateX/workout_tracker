@@ -13,10 +13,10 @@ else
 {
     <div class="row animated fadeIn">
 
-        <div class="col-xs-4">
+        <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4">
         </div>
 
-        <div class="col-xs-4 loginarea">
+        <div class="col-xs-10 col-sm-8 col-md-6 col-lg-4 loginarea">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <img src="~/Content/logo.png" id="loginlogo"/>
@@ -39,25 +39,26 @@ else
                             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                             {
                                 @Html.AntiForgeryToken()
-                                <br /><br />
+                                <br />
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
-                                    @Html.LabelFor(tuple => tuple.Item1.Email, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
+                                    @Html.LabelFor(tuple => tuple.Item1.Email, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-8">
                                         @Html.TextBoxFor(tuple => tuple.Item1.Email, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(tuple => tuple.Item1.Email, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    @Html.LabelFor(tuple => tuple.Item1.Password, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
+                                    @Html.LabelFor(tuple => tuple.Item1.Password, new { @class = "col-sm-3 control-label" })
+                                    <div class="col-sm-8">
                                         @Html.PasswordFor(tuple => tuple.Item1.Password, new { @class = "form-control" })
                                         @Html.ValidationMessageFor(tuple => tuple.Item1.Password, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
+                                <div class="col-sm-1"></div>
 
                                 <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
+                                    <div class="col-sm-offset-3 col-sm-9">
 
                                         <div class="checkbox checkbox-primary">
                                             <input type="checkbox" id="RememberMe">
@@ -69,7 +70,7 @@ else
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
+                                    <div class="col-sm-offset-3 col-sm-9">
                                         <input type="submit" value="Log in" class="btn btn-success" />
                                     </div>
                                 </div>
@@ -90,25 +91,25 @@ else
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="form-group">
-                                            @Html.LabelFor(tuple => tuple.Item2.Email, new { @class = "col-md-2 control-label" })
-                                            <div class="col-md-10">
+                                            @Html.LabelFor(tuple => tuple.Item2.Email, new { @class = "col-sm-3 control-label" })
+                                            <div class="col-sm-9">
                                                 @Html.TextBoxFor(tuple => tuple.Item2.Email, new { @class = "form-control" })
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            @Html.LabelFor(tuple => tuple.Item2.Password, new { @class = "col-md-2 control-label" })
-                                            <div class="col-md-10">
+                                            @Html.LabelFor(tuple => tuple.Item2.Password, new { @class = "col-sm-3 control-label" })
+                                            <div class="col-sm-9">
                                                 @Html.PasswordFor(tuple => tuple.Item2.Password, new { @class = "form-control" })
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            @Html.LabelFor(tuple => tuple.Item2.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                                            <div class="col-md-10">
+                                            @Html.LabelFor(tuple => tuple.Item2.ConfirmPassword, new { @class = "col-sm-3 control-label" })
+                                            <div class="col-sm-9">
                                                 @Html.PasswordFor(tuple => tuple.Item2.ConfirmPassword, new { @class = "form-control" })
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-md-offset-2 col-md-10">
+                                            <div class="col-sm-offset-3 col-sm-9">
                                                 <input type="submit" class="btn btn-success" value="Register" />
                                                 @Html.ValidationSummary("", new { @class = "text-danger" })
                                             </div>
@@ -124,7 +125,7 @@ else
 
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4">
         </div>
 
     </div>
@@ -133,10 +134,12 @@ else
         @Scripts.Render("~/bundles/jqueryval")
 
         <script>
+            var loginshown = true;
+            var registershown = false;
             var animationrunning = false;
 
             $('#logintab').click(function () {
-                if (animationrunning) return;
+                if (animationrunning || loginshown) return;
                 animationrunning = true;
 
                 $('#logintabli').addClass('active');
@@ -157,13 +160,15 @@ else
                     function (e) {
                         $('#login').removeClass();
                         animationrunning = false;
+                        loginshown = true;
+                        registershown = false;
                     }
                 );;
 
             });
 
             $('#registertab').click(function () {
-                if (animationrunning) return;
+                if (animationrunning || registershown) return;
                 animationrunning = true;
 
                 $('#logintabli').removeClass('active');
@@ -184,6 +189,8 @@ else
                    function (e) {
                        $('#register').removeClass();
                        animationrunning = false;
+                       registershown = true;
+                       loginshown = false;
                    }
                );
 

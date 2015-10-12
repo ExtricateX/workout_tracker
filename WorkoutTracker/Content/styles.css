@@ -13,10 +13,18 @@ body {
     background: #DBE9EE;
 }
 
-.loginarea {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+@media(min-height: 600px) {
+    .loginarea {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+}
+
+@media(max-height: 600px) {
+    .loginarea {
+      margin-top: 20px;
+    }
 }
 
 #login, #register {
@@ -35,9 +43,33 @@ body {
 }
 
 .loginarea .panel {
-    min-height: 440px;
     overflow: hidden;
+    height: 520px;
 }
+
+@media(min-width: 48em) {
+    .loginarea .panel {
+        height: 460px;
+    }
+}
+@media(min-width: 62em){
+    .loginarea .panel {
+        height: 400px;
+    }
+}
+@media(min-width:62em){
+    .loginarea .panel {
+        height: 420px;
+    }
+}
+@media(min-width:75em){
+
+}
+
+@media screen and (max-width: 480px) {
+   
+}
+
 
 .loginarea .panel-default .panel-heading {
     background: #4A6FA5;
