@@ -1,23 +1,194 @@
-﻿@{
+﻿@using WorkoutTracker.Models
+@model Tuple<LoginViewModel, RegisterViewModel>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <button class="btn btn-fab btn-raised btn-primary btn-material-green pull-right"><i class="mdi-content-add"></i><div class="ripple-wrapper"></div></button>
-                    <h3>Workouts</h3>
-                </div>
-            </div>
-        </div>
-    </div>
 
 }
 else
 {
-    <div>Welcome to the site...</div>
+    <div class="row animated fadeIn">
+
+        <div class="col-xs-4">
+        </div>
+
+        <div class="col-xs-4 loginarea">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <img src="~/Content/logo.png" id="loginlogo"/>
+                    <h1>Workout Tracker</h1>
+                </div>
+                <div class="panel-body">
+
+                    <ul class="nav nav-tabs">
+                        <li id="logintabli" class="active">
+                            <a id="logintab" href="#">Login</a>
+                        </li>
+                        <li id="registertabli">
+                            <a id="registertab" href="#">Register</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <div id="login">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <br /><br />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(tuple => tuple.Item1.Email, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(tuple => tuple.Item1.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(tuple => tuple.Item1.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(tuple => tuple.Item1.Password, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.PasswordFor(tuple => tuple.Item1.Password, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(tuple => tuple.Item1.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+
+                                        <div class="checkbox checkbox-primary">
+                                            <input type="checkbox" id="RememberMe">
+                                            <label for="RememberMe">
+                                                Remember me?
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Log in" class="btn btn-success" />
+                                    </div>
+                                </div>
+
+                                @* Enable this once you have account confirmation enabled for password reset functionality
+                                <p>
+                                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                                </p>
+                                *@
+                            }
+                        </div>
+
+                        <div id="register" style="display:none">
+                            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <br />
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(tuple => tuple.Item2.Email, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                @Html.TextBoxFor(tuple => tuple.Item2.Email, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(tuple => tuple.Item2.Password, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                @Html.PasswordFor(tuple => tuple.Item2.Password, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(tuple => tuple.Item2.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                                            <div class="col-md-10">
+                                                @Html.PasswordFor(tuple => tuple.Item2.ConfirmPassword, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" class="btn btn-success" value="Register" />
+                                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xs-4">
+        </div>
+
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script>
+            var animationrunning = false;
+
+            $('#logintab').click(function () {
+                if (animationrunning) return;
+                animationrunning = true;
+
+                $('#logintabli').addClass('active');
+                $('#registertabli').removeClass('active');
+
+
+                $('#register').addClass("animated slideOutRight")
+                   .one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+                       function (e) {
+                           $('#register').hide();
+                           $('#register').removeClass();
+                       }
+               );
+
+                $('#login').show();
+                $('#login').addClass("animated slideInLeft")
+                    .one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+                    function (e) {
+                        $('#login').removeClass();
+                        animationrunning = false;
+                    }
+                );;
+
+            });
+
+            $('#registertab').click(function () {
+                if (animationrunning) return;
+                animationrunning = true;
+
+                $('#logintabli').removeClass('active');
+                $('#registertabli').addClass('active');
+
+
+                $('#login').addClass("animated slideOutLeft")
+                   .one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+                       function (e) {
+                           $('#login').hide();
+                           $('#login').removeClass();
+                       }
+               );
+
+               $('#register').show();
+               $('#register').addClass("animated slideInRight")
+                   .one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+                   function (e) {
+                       $('#register').removeClass();
+                       animationrunning = false;
+                   }
+               );
+
+            });
+
+        </script>
+    }
 }
