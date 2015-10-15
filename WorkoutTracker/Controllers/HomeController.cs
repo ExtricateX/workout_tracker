@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WorkoutTracker.Models;
 
 namespace WorkoutTracker.Controllers
 {
@@ -13,18 +14,15 @@ namespace WorkoutTracker.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public PartialViewResult Login()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return PartialView("Login", new LoginViewModel());
         }
 
-        public ActionResult Contact()
+        public PartialViewResult Register()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return PartialView("Register", new RegisterViewModel());
         }
+
     }
 }

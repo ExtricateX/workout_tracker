@@ -1,0 +1,36 @@
+﻿@using WorkoutTracker.Models
+@model RegisterViewModel
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(o => o.Email, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(o => o.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(o => o.Password, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.PasswordFor(o => o.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(o => o.ConfirmPassword, new { @class = "col-sm-3 control-label" })
+                <div class="col-sm-9">
+                    @Html.PasswordFor(o => o.ConfirmPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input type="submit" class="btn btn-success" value="Register" />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
