@@ -1,0 +1,50 @@
+﻿@using WorkoutTracker.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(o => o.Email, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-8">
+            @Html.TextBoxFor(o => o.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(o => o.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.Password, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-8">
+            @Html.PasswordFor(o => o.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(o => o.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+
+            <div class="checkbox checkbox-primary">
+                <input type="checkbox" id="RememberMe">
+                <label for="RememberMe">
+                    Remember me?
+                </label>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <input type="submit" value="Log in" class="btn btn-success" />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @* Enable this once you have account confirmation enabled for password reset functionality
+    <p>
+        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+    </p>
+    *@
+}
